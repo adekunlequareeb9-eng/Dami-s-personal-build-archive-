@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Mathematical Calculator — Damilare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       background-color: #12121a;
@@ -103,7 +104,6 @@
       object-fit: cover;
       display: block;
     }
-
     .lightbox {
       display: none;
       position: fixed;
@@ -118,17 +118,36 @@
       display: flex;
     }
     .lightbox img {
-  max-width: 95%;
-  max-height: 95%;
-  border-radius: 8px;
-}
+      max-width: 95%;
+      max-height: 95%;
+      border-radius: 8px;
+      touch-action: none;
+      -webkit-user-drag: none;
+      user-select: none;
+    }
     .lightbox .close {
       position: absolute;
       top: 20px;
       right: 25px;
       color: white;
       font-size: 2em;
-      cursor: pointer;
+      z-index: 1001;
+    }
+    .lightbox .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2.5em;
+      padding: 10px 15px;
+      z-index: 1001;
+      user-select: none;
+    }
+    .lightbox .nav-arrow.prev { left: 10px; }
+    .lightbox .nav-arrow.next { right: 10px; }
+    .lightbox .nav-arrow.disabled {
+      opacity: 0.2;
+      pointer-events: none;
     }
     .navbar {
       display: flex;
@@ -149,24 +168,9 @@
       font-weight: bold;
     }
   </style>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-  <script>
-  function openLightbox(src) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox').classList.add('active');
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-  }
-  </script>
 <body>
 
-  <div class="navbar">
-    <a href="index.html">HOME</a>
-    <a href="archive.html">ARCHIVE</a>
-  </div>
- 
   <div class="navbar">
     <a href="index.html">HOME</a>
     <a href="archive.html">ARCHIVE</a>
@@ -222,9 +226,17 @@
       <p>Continued roadmap development.</p>
     </div>
     <div class="step">
+      <a href="https://github.com/adekunlequareeb9-eng/Mathematical-calculator" style="color:#facc15;">Full build log &amp; commit history on GitHub →</a>
+    </div>
+  </div>
+
+  <h2>What It Does</h2>
+  <p>What started as a basic calculator grew into a full mathematics toolkit. It handles standard arithmetic, scientific functions (trig, logs, powers), and a memory system — but it goes further, into symbolic algebra and calculus (simplify, expand, factor, solve, differentiate, integrate), number theory (primes, GCD, LCM), matrices and vectors, unit conversions, and function graphing with zoom and pan.</p>
+  <p>Most operations come with "Steps on How" — instead of just showing an answer, it explains the working, so it doubles as a learning tool. There's also a camera-scan feature that reads a handwritten or printed problem and solves it directly.</p>
+  <p>Currently sitting at over 90% of the full roadmap complete.</p>
+
   <h2>Screenshots</h2>
-  <class="gallery">
-    <div class="gallery">
+  <div class="gallery">
     <img src="shot01.jpg" onclick="openLightbox('shot01.jpg')">
     <img src="shot02.jpg" onclick="openLightbox('shot02.jpg')">
     <img src="shot03.jpg" onclick="openLightbox('shot03.jpg')">
@@ -241,11 +253,14 @@
     <img src="shot14.jpg" onclick="openLightbox('shot14.jpg')">
   </div>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="close">&times;</span>
-  <img id="lightbox-img" src="">
-</div>
-      <h2>Downloads</h2>
+  <div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <span class="nav-arrow prev" id="prevArrow" onclick="changeImage(-1)">&#8249;</span>
+    <img id="lightbox-img" src="" draggable="false">
+    <span class="nav-arrow next" id="nextArrow" onclick="changeImage(1)">&#8250;</span>
+  </div>
+
+  <h2>Downloads</h2>
   <div class="downloads">
     <a href="https://github.com/adekunlequareeb9-eng/Mathematical-calculator/releases/download/build-2cb9fce/mathematicalcalculator-1.0-armeabi-v7a_arm64-v8a-debug.apk">⬇ Android APK <span>v1.5</span></a>
     <a href="https://github.com/adekunlequareeb9-eng/Mathematical-calculator">⌘ Source Code <span>GitHub</span></a>
@@ -253,3 +268,75 @@
 
   <h2>What I Learned</h2>
   <p>Calmness. When things start feeling like they're going haywire, the move is always the same — stop, breathe, cancel everything, and restart with a clear head.</p>
+
+  <script>
+  const gallery = ["shot01.jpg","shot02.jpg","shot03.jpg","shot04.jpg","shot05.jpg","shot06.jpg","shot07.jpg","shot08.jpg","shot09.jpg","shot10.jpg","shot11.jpg","shot12.jpg","shot13.jpg","shot14.jpg"];
+  let currentIndex = 0;
+
+  function openLightbox(src) {
+    currentIndex = gallery.indexOf(src);
+    updateLightboxImage();
+    document.getElementById('lightbox').classList.add('active');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+
+  function changeImage(direction) {
+    const newIndex = currentIndex + direction;
+    if (newIndex >= 0 && newIndex < gallery.length) {
+      currentIndex = newIndex;
+      updateLightboxImage();
+    }
+  }
+
+  function updateLightboxImage() {
+    document.getElementById('lightbox-img').src = gallery[currentIndex];
+    document.getElementById('prevArrow').classList.toggle('disabled', currentIndex === 0);
+    document.getElementById('nextArrow').classList.toggle('disabled', currentIndex === gallery.length - 1);
+  }
+
+  const imgEl = document.getElementById('lightbox-img');
+  const lightboxEl = document.getElementById('lightbox');
+  let startX = 0, startY = 0, deltaX = 0, deltaY = 0, dragging = false;
+
+  imgEl.addEventListener('pointerdown', e => {
+    startX = e.clientX;
+    startY = e.clientY;
+    dragging = true;
+    imgEl.style.transition = 'none';
+  });
+
+  imgEl.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    deltaX = e.clientX - startX;
+    deltaY = e.clientY - startY;
+    if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+      imgEl.style.transform = `translateY(${deltaY}px)`;
+      lightboxEl.style.background = `rgba(0,0,0,${Math.max(0.9 - deltaY / 400, 0.2)})`;
+    }
+  });
+
+  imgEl.addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false;
+    imgEl.style.transition = 'transform 0.2s ease';
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (Math.abs(deltaX) > 50) {
+        changeImage(deltaX > 0 ? -1 : 1);
+      }
+    } else if (deltaY > 100) {
+      closeLightbox();
+    }
+
+    imgEl.style.transform = 'translateY(0)';
+    lightboxEl.style.background = 'rgba(0,0,0,0.9)';
+    deltaX = 0;
+    deltaY = 0;
+  });
+  </script>
+
+</body>
+</html>

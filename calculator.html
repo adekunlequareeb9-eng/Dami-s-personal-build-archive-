@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mathematical Calculator — Damilare</title>
+  <style>
+    body {
+      background-color: #12121a;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 30px 20px;
+      margin: 0;
+      max-width: 500px;
+      margin: auto;
+    }
+    a.back {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    h1 {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    .status {
+      display: inline-block;
+      background-color: #2e2e42;
+      color: #facc15;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      margin-bottom: 20px;
+    }
+    .meta {
+      color: #888;
+      font-size: 0.85em;
+      margin-bottom: 25px;
+    }
+    h2 {
+      font-size: 1.1em;
+      color: #ffcc00;
+      border-bottom: 1px solid #2e2e42;
+      padding-bottom: 8px;
+      margin-top: 35px;
+    }
+    p {
+      line-height: 1.6;
+      color: #ddd;
+    }
+    .timeline {
+      border-left: 2px solid #333;
+      padding-left: 15px;
+      margin-left: 5px;
+    }
+    .timeline .step {
+      margin-bottom: 18px;
+    }
+    .timeline .version {
+      color: #4ade80;
+      font-weight: bold;
+    }
+    .downloads a {
+      display: block;
+      background-color: #1e1e2a;
+      color: white;
+      text-decoration: none;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .downloads a span {
+      color: #888;
+      font-size: 0.85em;
+      display: block;
+    }
+    .phase {
+      margin-bottom: 20px;
+      padding-left: 5px;
+    }
+    .phase .range {
+      color: #888;
+      font-size: 0.8em;
+    }
+    .phase .quote {
+      font-style: italic;
+      color: #ddd;
+    }
+    .phase.fail .quote { color: #f87171; }
+    .phase.success .quote { color: #4ade80; }
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 10px;
+      padding: 10px 0;
+      white-space: nowrap;
+    }
+    .gallery img {
+      height: 160px;
+      width: auto;
+      max-width: none;
+      border-radius: 8px;
+      flex-shrink: 0;
+      object-fit: cover;
+      display: block;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: 8px;
+}
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+    }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #2e2e42;
+    }
+    .navbar a {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9em;
+      letter-spacing: 1px;
+    }
+    .navbar a.current {
+      color: #ffcc00;
+      font-weight: bold;
+    }
+  </style>
+</head>
+  <script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  </script>
+<body>
+
+  <div class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="archive.html">ARCHIVE</a>
+  </div>
+ 
+  <div class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="archive.html">ARCHIVE</a>
+  </div>
+
+  <h1>Mathematical Calculator</h1>
+  <div class="status">🟡 In Development · v1.5</div>
+  <div class="meta">Started 2026 · Python · Kivy · Android</div>
+
+  <h2>The Idea</h2>
+  <p>This started as a question, not a plan. I wanted to know what I could actually build using just my phone — no laptop, nothing fancy. Coding felt fun and exciting from the first line, and I didn't want to stop once I started. I kept questioning how far a phone-only setup could really go, and this calculator became the answer.</p>
+
+  <h2>The Journey</h2>
+  <div class="timeline">
+    <div class="phase fail">
+      <div class="range">Builds #1–12</div>
+      <div class="quote">❌ "Can we even build this thing?"</div>
+      <p>The Android build environment was being established and repeatedly debugged.</p>
+    </div>
+    <div class="phase success">
+      <div class="range">Builds #13–18</div>
+      <div class="quote">✅ "Yes. We have a working APK."</div>
+      <p>First stable build period — progressed through Version 1.2 and Version 1.4.</p>
+    </div>
+    <div class="phase fail">
+      <div class="range">Build #19</div>
+      <div class="quote">💥 "We broke the development state."</div>
+      <p>The Version 1.5 development state crashed and became unusable.</p>
+    </div>
+    <div class="phase success">
+      <div class="range">Build #20</div>
+      <div class="quote">🔄 "Recover the working version and continue."</div>
+      <p>The working #18 state was restored and became the foundation for Version 1.5.</p>
+    </div>
+    <div class="phase fail">
+      <div class="range">Builds #21–31</div>
+      <div class="quote">❌ "Version 1.5 is great, but Android is fighting us."</div>
+      <p>A major Android dependency and build-compatibility battle.</p>
+    </div>
+    <div class="phase success">
+      <div class="range">Builds #32–40</div>
+      <div class="quote">✅ "Build system stabilized. Now we can actually develop."</div>
+      <p>The pipeline stabilized and real Version 1.5 feature development resumed rapidly.</p>
+    </div>
+    <div class="phase success">
+      <div class="range">Builds #42–43</div>
+      <div class="quote">🚀 "Back to serious feature development."</div>
+      <p>Advanced-mathematics dependencies were added and camera scanning was successfully introduced.</p>
+    </div>
+    <div class="phase success">
+      <div class="range">Current — Recovery-v1.5</div>
+      <div class="quote">🔥 Scientific + Advanced Math + Symbolic Math + Graphing + Steps + Camera Scanning</div>
+      <p>Continued roadmap development.</p>
+    </div>
+    <div class="step">
+  <h2>Screenshots</h2>
+  <class="gallery">
+    <div class="gallery">
+    <img src="shot01.jpg" onclick="openLightbox('shot01.jpg')">
+    <img src="shot02.jpg" onclick="openLightbox('shot02.jpg')">
+    <img src="shot03.jpg" onclick="openLightbox('shot03.jpg')">
+    <img src="shot04.jpg" onclick="openLightbox('shot04.jpg')">
+    <img src="shot05.jpg" onclick="openLightbox('shot05.jpg')">
+    <img src="shot06.jpg" onclick="openLightbox('shot06.jpg')">
+    <img src="shot07.jpg" onclick="openLightbox('shot07.jpg')">
+    <img src="shot08.jpg" onclick="openLightbox('shot08.jpg')">
+    <img src="shot09.jpg" onclick="openLightbox('shot09.jpg')">
+    <img src="shot10.jpg" onclick="openLightbox('shot10.jpg')">
+    <img src="shot11.jpg" onclick="openLightbox('shot11.jpg')">
+    <img src="shot12.jpg" onclick="openLightbox('shot12.jpg')">
+    <img src="shot13.jpg" onclick="openLightbox('shot13.jpg')">
+    <img src="shot14.jpg" onclick="openLightbox('shot14.jpg')">
+  </div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="close">&times;</span>
+  <img id="lightbox-img" src="">
+</div>
+      <h2>Downloads</h2>
+  <div class="downloads">
+    <a href="https://github.com/adekunlequareeb9-eng/Mathematical-calculator/releases/download/build-2cb9fce/mathematicalcalculator-1.0-armeabi-v7a_arm64-v8a-debug.apk">⬇ Android APK <span>v1.5</span></a>
+    <a href="https://github.com/adekunlequareeb9-eng/Mathematical-calculator">⌘ Source Code <span>GitHub</span></a>
+  </div>
+
+  <h2>What I Learned</h2>
+  <p>Calmness. When things start feeling like they're going haywire, the move is always the same — stop, breathe, cancel everything, and restart with a clear head.</p>

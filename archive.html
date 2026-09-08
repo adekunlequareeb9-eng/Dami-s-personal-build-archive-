@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Archive — Damilare</title>
+  <style>
+    body {
+      background-color: #12121a;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 30px 20px;
+      margin: 0;
+      max-width: 500px;
+      margin: auto;
+    }
+    a.back {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    h1 {
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .filters button {
+      background-color: #1e1e2a;
+      color: #ccc;
+      border: 1px solid #2e2e42;
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.85em;
+      flex-shrink: 0;
+    }
+    .filters button.active {
+      background-color: #ffcc00;
+      color: #12121a;
+      border-color: #ffcc00;
+      font-weight: bold;
+    }
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .card {
+      background-color: #1e1e2a;
+      border-radius: 12px;
+      padding: 16px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      margin: 0 0 5px 0;
+    }
+    .card p {
+      color: #aaa;
+      font-size: 0.85em;
+      margin: 0 0 10px 0;
+    }
+    .status {
+      display: inline-block;
+      background-color: #2e2e42;
+      color: #facc15;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8em;
+    }
+    .empty {
+      color: #666;
+      text-align: center;
+      padding: 40px 0;
+      display: none;
+    }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #2e2e42;
+    }
+    .navbar a {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9em;
+      letter-spacing: 1px;
+    }
+    .navbar a.current {
+    color: #ffcc00;
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="index.html">HOME</a>
+    <a href="archive.html" class="current">ARCHIVE</a>
+  </div>
+ 
+  <a class="back" href="index.html">← Back to Home</a>
+  <h1>Project Archive</h1>
+
+  <div class="filters">
+    <button class="active" onclick="filterProjects('all', this)">ALL</button>
+    <button onclick="filterProjects('android', this)">ANDROID</button>
+    <button onclick="filterProjects('web', this)">WEB</button>
+    <button onclick="filterProjects('python', this)">PYTHON</button>
+  </div>
+
+  <div class="grid" id="grid">
+    <a href="calculator.html" class="card" data-tags="android python">
+      <img src="shot01.jpg">
+      <h3>Mathematical Calculator</h3>
+      <p>Android · Python · Kivy</p>
+      <div class="status">🟡 In Development · Recovery-v1.5</div>
+    </a>
+  </div>
+
+  <div class="empty" id="empty">No projects in this category yet.</div>
+
+  <script>
+    function filterProjects(tag, btn) {
+      document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const tags = card.getAttribute('data-tags');
+        if (tag === 'all' || tags.includes(tag)) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('empty').style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  </script>
+
+</body>
+</html>

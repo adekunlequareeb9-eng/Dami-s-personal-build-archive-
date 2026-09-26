@@ -4,6 +4,12 @@
 <head>
   <title>Mathematical Calculator — Damilare</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12121a">
+  <meta name="description" content="The Mathematical Calculator project and its development journey.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
     body {
       background-color: #12121a;
@@ -337,6 +343,12 @@
     deltaX = 0;
     deltaY = 0;
   });
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js");
+    });
+  }
   </script>
 
 </body>

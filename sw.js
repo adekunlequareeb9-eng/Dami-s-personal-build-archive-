@@ -1,4 +1,4 @@
-const CACHE_NAME = "dami-archive-v4";
+const CACHE_NAME = "dami-archive-v5";
 
 const APP_SHELL = [
   "./",
@@ -11,7 +11,6 @@ const APP_SHELL = [
   "./icon.svg",
   "./icon-192.png",
   "./icon-512.png",
-  "./study-companion-tasks.jpg",
   "./shot01.jpg",
   "./shot02.jpg",
   "./shot03.jpg",
@@ -37,19 +36,45 @@ self.addEventListener("install", event => {
 
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
-      )
-    )
+    Promise.all([
+      caches.keys().then(keys =>
+        Promise.all(
+          keys
+            .filter(key => key !== CACHE_NAME)
+            .map(key => caches.delete(key))
+        )
+      ),
+      self.registration.navigationPreload
+        ? self.registration.navigationPreload.enable()
+        : Promise.resolve()
+    ])
   );
   self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      (async () => {
+        try {
+          const preload = await event.preloadResponse;
+          const response = preload || await fetch(event.request);
+          if (response && response.status === 200) {
+            const copy = response.clone();
+            event.waitUntil(
+              caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy))
+            );
+          }
+          return response;
+        } catch {
+          return caches.match(event.request).then(cached => cached || caches.match("./index.html"));
+        }
+      })()
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then(cached => {

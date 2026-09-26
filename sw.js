@@ -1,10 +1,12 @@
-const CACHE_NAME = "dami-archive-v2";
+const CACHE_NAME = "dami-archive-v3";
 
 const APP_SHELL = [
   "./",
   "./index.html",
   "./archive.html",
   "./calculator.html",
+  "./study-companion.html",
+  "./study-companion-app.html",
   "./manifest.json",
   "./icon.svg",
   "./icon-192.png",

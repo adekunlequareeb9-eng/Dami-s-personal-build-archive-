@@ -1,4 +1,4 @@
-const CACHE_NAME = "dami-archive-v5";
+const CACHE_NAME = "dami-archive-v6";
 
 const APP_SHELL = [
   "./",

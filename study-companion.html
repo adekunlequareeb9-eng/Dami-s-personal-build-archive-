@@ -46,6 +46,6 @@
   <p class="note">The archive will be updated as the project becomes more defined.</p>
   <h2>What I Learned</h2>
   <p>Start with something usable. A project does not need its entire future planned before the first useful version exists.</p>
-  <script>if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script>
+  <script>if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").then(reg => reg.update()));</script>
 </body>
 </html>

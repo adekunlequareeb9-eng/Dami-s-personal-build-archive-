@@ -3,6 +3,13 @@
 <meta charset="UTF-8">
 <head>
   <title>Archive — Damilare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12121a">
+  <meta name="description" content="Browse Dami's personal project archive.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
     body {
       background-color: #12121a;
@@ -99,11 +106,10 @@
       letter-spacing: 1px;
     }
     .navbar a.current {
-    color: #ffcc00;
-    font-weight: bold;
-  }
+      color: #ffcc00;
+      font-weight: bold;
+    }
   </style>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -152,6 +158,12 @@
       });
 
       document.getElementById('empty').style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js");
+      });
     }
   </script>
 

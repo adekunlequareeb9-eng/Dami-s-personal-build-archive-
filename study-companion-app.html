@@ -34,7 +34,7 @@
     let remaining=1500,running=false,interval=null;const timer=document.getElementById("timer"),state=document.getElementById("timerState");function show(){const m=Math.floor(remaining/60),s=remaining%60;timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}function stop(){clearInterval(interval);interval=null;running=false}
     document.getElementById("start").addEventListener("click",()=>{if(running)return;running=true;state.textContent="Focus session running.";interval=setInterval(()=>{remaining--;show();if(remaining<=0){stop();remaining=0;show();state.textContent="Session complete. Take a break."}},1000)});
     document.getElementById("pause").addEventListener("click",()=>{if(!running)return;stop();state.textContent="Paused."});document.getElementById("reset").addEventListener("click",()=>{stop();remaining=1500;show();state.textContent="Ready for a study session."});show();
-    if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));
+    if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").then(reg => reg.update()));
   </script>
 </body>
 </html>

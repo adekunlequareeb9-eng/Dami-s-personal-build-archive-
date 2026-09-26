@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+  <title>Study Companion — Damilare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12121a">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <style>
+    body{background:#12121a;color:#fff;font-family:Arial,sans-serif;padding:24px 16px;margin:0;max-width:500px;margin:auto}
+    a{color:#ffcc00;text-decoration:none}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.muted{color:#888;font-size:.85em}
+    .panel{background:#1e1e2a;border-radius:12px;padding:16px;margin:14px 0}h1{font-size:1.8em;margin:0}h2{font-size:1em;color:#ffcc00;margin-top:0}
+    form{display:flex;gap:8px}.input{flex:1;background:#12121a;border:1px solid #333;color:#fff;border-radius:8px;padding:11px;font-size:16px}
+    button{background:#ffcc00;color:#12121a;border:0;border-radius:8px;padding:10px 13px;font-weight:bold;cursor:pointer}.secondary{background:#2e2e42;color:#ddd}
+    .task{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #2e2e42}.task:last-child{border-bottom:0}.task label{flex:1}.done{text-decoration:line-through;color:#666}
+    .timer{text-align:center;font-size:3em;font-variant-numeric:tabular-nums;margin:10px 0 15px}.actions{display:flex;gap:8px;justify-content:center}.actions button{min-width:82px}
+    .empty{color:#666;text-align:center;padding:10px}textarea{width:100%;box-sizing:border-box;min-height:130px;background:#12121a;border:1px solid #333;color:#fff;border-radius:8px;padding:11px;font:16px Arial;resize:vertical}
+    .saved{color:#4ade80;font-size:.8em;margin-top:7px;min-height:15px}
+  </style>
+</head>
+<body>
+  <div class="top"><a href="study-companion.html">← Project</a><span class="muted">Working Prototype</span></div>
+  <h1>Study Companion</h1><p class="muted">A small place to plan, focus, and keep notes.</p>
+  <section class="panel"><h2>Today's Study Tasks</h2><form id="taskForm"><input id="taskInput" class="input" maxlength="100" placeholder="Add a study task" autocomplete="off"><button>Add</button></form><div id="tasks"></div><button id="clearDone" class="secondary" type="button" style="margin-top:10px">Clear completed</button></section>
+  <section class="panel"><h2>Focus Timer</h2><div id="timer" class="timer">25:00</div><div class="actions"><button id="start" type="button">Start</button><button id="pause" class="secondary" type="button">Pause</button><button id="reset" class="secondary" type="button">Reset</button></div><p id="timerState" class="muted" style="text-align:center">Ready for a study session.</p></section>
+  <section class="panel"><h2>Quick Notes</h2><textarea id="notes" placeholder="Write something you want to remember..."></textarea><div id="saved" class="saved"></div></section>
+  <script>
+    const TASK_KEY="study-companion-tasks-v1",NOTE_KEY="study-companion-notes-v1";let tasks=[];try{tasks=JSON.parse(localStorage.getItem(TASK_KEY)||"[]")}catch(e){tasks=[]}
+    const taskInput=document.getElementById("taskInput"),tasksEl=document.getElementById("tasks");function save(){localStorage.setItem(TASK_KEY,JSON.stringify(tasks))}
+    function render(){tasksEl.innerHTML="";if(!tasks.length){tasksEl.innerHTML='<div class="empty">No tasks yet.</div>';return}tasks.forEach((t,i)=>{const row=document.createElement("div");row.className="task";const box=document.createElement("input");box.type="checkbox";box.checked=t.done;const label=document.createElement("label");label.textContent=t.text;label.className=t.done?"done":"";box.addEventListener("change",()=>{tasks[i].done=box.checked;save();render()});row.append(box,label);tasksEl.append(row)})}
+    document.getElementById("taskForm").addEventListener("submit",e=>{e.preventDefault();const text=taskInput.value.trim();if(!text)return;tasks.push({text,done:false});save();taskInput.value="";render();taskInput.focus()});document.getElementById("clearDone").addEventListener("click",()=>{tasks=tasks.filter(t=>!t.done);save();render()});render();
+    const notes=document.getElementById("notes"),saved=document.getElementById("saved");notes.value=localStorage.getItem(NOTE_KEY)||"";let noteTimer;notes.addEventListener("input",()=>{clearTimeout(noteTimer);noteTimer=setTimeout(()=>{localStorage.setItem(NOTE_KEY,notes.value);saved.textContent="Saved locally";setTimeout(()=>saved.textContent="",1200)},250)});
+    let remaining=1500,running=false,interval=null;const timer=document.getElementById("timer"),state=document.getElementById("timerState");function show(){const m=Math.floor(remaining/60),s=remaining%60;timer.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}function stop(){clearInterval(interval);interval=null;running=false}
+    document.getElementById("start").addEventListener("click",()=>{if(running)return;running=true;state.textContent="Focus session running.";interval=setInterval(()=>{remaining--;show();if(remaining<=0){stop();remaining=0;show();state.textContent="Session complete. Take a break."}},1000)});
+    document.getElementById("pause").addEventListener("click",()=>{if(!running)return;stop();state.textContent="Paused."});document.getElementById("reset").addEventListener("click",()=>{stop();remaining=1500;show();state.textContent="Ready for a study session."});show();
+    if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));
+  </script>
+</body>
+</html>

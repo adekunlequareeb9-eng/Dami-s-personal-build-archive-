@@ -18,6 +18,7 @@
     .meta{color:#888;font-size:.85em;margin-bottom:25px}h2{font-size:1.1em;color:#ffcc00;border-bottom:1px solid #2e2e42;padding-bottom:8px;margin-top:35px}
     p{line-height:1.6;color:#ddd}.feature{background:#1e1e2a;border-radius:10px;padding:14px;margin:10px 0}.feature strong{display:block;margin-bottom:5px}.feature span{color:#aaa;font-size:.9em}
     .launch{display:block;background:#ffcc00;color:#12121a;text-decoration:none;font-weight:bold;text-align:center;padding:13px 15px;border-radius:10px;margin:20px 0}
+    .screenshot{background:#1e1e2a;border-radius:12px;padding:10px;margin-top:15px}.screenshot img{display:block;width:100%;border-radius:8px}.caption{color:#999;font-size:.8em;line-height:1.4;padding:8px 4px 2px}
     .note{color:#888;font-size:.85em;line-height:1.5}
   </style>
 </head>
@@ -35,9 +36,14 @@
   <div class="feature"><strong>Quick notes</strong><span>Keep short notes locally on the device while studying.</span></div>
   <div class="feature"><strong>Offline-first</strong><span>The prototype is designed to keep working after the PWA has been installed and cached.</span></div>
   <a class="launch" href="study-companion-app.html">Open Working Prototype →</a>
+  <h2>Prototype Screenshot</h2>
+  <div class="screenshot">
+    <img src="study-companion-tasks.jpg" alt="Student Study Companion tasks screen">
+    <div class="caption">Current working Tasks screen, captured from the live prototype.</div>
+  </div>
   <h2>The Journey</h2>
   <p>This is deliberately an early build. The goal is to use the prototype first, find what is genuinely useful, and let the next features come from actual study needs instead of filling it with features just because they sound impressive.</p>
-  <p class="note">The archive will be updated as the project becomes more defined. A dedicated screenshot gallery can be added once the interface has settled.</p>
+  <p class="note">The archive will be updated as the project becomes more defined.</p>
   <h2>What I Learned</h2>
   <p>Start with something usable. A project does not need its entire future planned before the first useful version exists.</p>
   <script>if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));</script>

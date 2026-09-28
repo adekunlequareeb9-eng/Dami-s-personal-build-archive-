@@ -1,1 +1,133 @@
-PLACEHOLDER_WILL_REPLACE
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;head&gt;
+  &lt;title&gt;Student Study Companion — Damilare&lt;/title&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta name="theme-color" content="#12121a"&gt;
+  &lt;meta name="description" content="The Student Study Companion project and its development journey."&gt;
+  &lt;link rel="manifest" href="manifest.json"&gt;
+  &lt;link rel="icon" href="icon.svg" type="image/svg+xml"&gt;
+  &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;
+  &lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;
+  &lt;style&gt;
+    body{background:#12121a;color:white;font-family:Arial,sans-serif;padding:30px 20px;margin:0;max-width:500px;margin:auto}
+    a.back{color:#888;text-decoration:none;font-size:.9em}.navbar{display:flex;justify-content:center;gap:25px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid #2e2e42}
+    .navbar a{color:#888;text-decoration:none;font-size:.9em;letter-spacing:1px}.navbar a.current{color:#ffcc00;font-weight:bold}
+    h1{margin-top:15px;margin-bottom:5px}.status{display:inline-block;background:#2e2e42;color:#facc15;padding:4px 10px;border-radius:20px;font-size:.8em;margin-bottom:20px}
+    .meta{color:#888;font-size:.85em;margin-bottom:25px}h2{font-size:1.1em;color:#ffcc00;border-bottom:1px solid #2e2e42;padding-bottom:8px;margin-top:35px}
+    p{line-height:1.6;color:#ddd}.feature{background:#1e1e2a;border-radius:10px;padding:14px;margin:10px 0}.feature strong{display:block;margin-bottom:5px}.feature span{color:#aaa;font-size:.9em}
+    .launch{display:block;background:#ffcc00;color:#12121a;text-decoration:none;font-weight:bold;text-align:center;padding:13px 15px;border-radius:10px;margin:20px 0}
+    .note{color:#888;font-size:.85em;line-height:1.5}
+    .gallery{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:10px;padding:10px 0;white-space:nowrap}
+    .gallery img{height:220px;width:auto;max-width:none;border-radius:8px;flex-shrink:0;object-fit:cover;display:block}
+    .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:999;justify-content:center;align-items:center}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:95%;max-height:95%;border-radius:8px;touch-action:none;-webkit-user-drag:none;user-select:none}
+    .lightbox .close{position:absolute;top:20px;right:25px;color:white;font-size:2em;z-index:1001}
+    .lightbox .nav-arrow{position:absolute;top:50%;transform:translateY(-50%);color:white;font-size:2.5em;padding:10px 15px;z-index:1001;user-select:none}
+    .lightbox .nav-arrow.prev{left:10px}.lightbox .nav-arrow.next{right:10px}
+    .lightbox .nav-arrow.disabled{opacity:.2;pointer-events:none}
+    .links a{display:block;background-color:#1e1e2a;color:white;text-decoration:none;padding:12px 15px;border-radius:10px;margin-bottom:10px}
+    .links a span{color:#888;font-size:.85em;display:block}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="navbar"&gt;&lt;a href="index.html"&gt;HOME&lt;/a&gt;&lt;a href="archive.html" class="current"&gt;ARCHIVE&lt;/a&gt;&lt;/div&gt;
+  &lt;a class="back" href="archive.html"&gt;← Back to Archive&lt;/a&gt;
+  &lt;h1&gt;Student Study Companion&lt;/h1&gt;
+  &lt;div class="status"&gt;🟡 Early Development · Web PWA&lt;/div&gt;
+  &lt;div class="meta"&gt;Started 2026 · HTML · CSS · JavaScript · PWA&lt;/div&gt;
+  &lt;h2&gt;The Idea&lt;/h2&gt;
+  &lt;p&gt;A study tool built around the things a student actually needs during a study session: knowing what to work on, staying focused, and keeping useful notes without needing a collection of separate apps.&lt;/p&gt;
+  &lt;h2&gt;Current Prototype&lt;/h2&gt;
+  &lt;div class="feature"&gt;&lt;strong&gt;Subjects&lt;/strong&gt;&lt;span&gt;Create subjects with a name, icon, color, and optional description to organize study material.&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="feature"&gt;&lt;strong&gt;Tasks&lt;/strong&gt;&lt;span&gt;Add tasks with a title, description, subject, due date, and priority — filter and sort them by subject, status, or due date.&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="feature"&gt;&lt;strong&gt;Offline-first&lt;/strong&gt;&lt;span&gt;The prototype is designed to keep working after the PWA has been installed and cached.&lt;/span&gt;&lt;/div&gt;
+  &lt;a class="launch" href="study-companion-app.html"&gt;Open Working Prototype →&lt;/a&gt;
+
+  &lt;h2&gt;Screenshots&lt;/h2&gt;
+  &lt;div class="gallery"&gt;
+    &lt;img src="study-subjects.jpg" onclick="openLightbox(0)"&gt;
+    &lt;img src="study-tasks.jpg" onclick="openLightbox(1)"&gt;
+  &lt;/div&gt;
+
+  &lt;div class="lightbox" id="lightbox"&gt;
+    &lt;span class="close" onclick="closeLightbox()"&gt;&amp;times;&lt;/span&gt;
+    &lt;span class="nav-arrow prev" id="prevArrow" onclick="changeImage(-1)"&gt;&amp;#8249;&lt;/span&gt;
+    &lt;img id="lightbox-img" src="" draggable="false"&gt;
+    &lt;span class="nav-arrow next" id="nextArrow" onclick="changeImage(1)"&gt;&amp;#8250;&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;h2&gt;The Journey&lt;/h2&gt;
+  &lt;p&gt;This is deliberately an early build. The goal is to use the prototype first, find what is genuinely useful, and let the next features come from actual study needs instead of filling it with features just because they sound impressive.&lt;/p&gt;
+  &lt;p class="note"&gt;The archive will be updated as the project becomes more defined.&lt;/p&gt;
+
+  &lt;h2&gt;Links&lt;/h2&gt;
+  &lt;div class="links"&gt;
+    &lt;a href="https://dami-s-personal-build-archive.adekunlequareeb9.workers.dev/study-companion-app.html"&gt;🌐 Web App &lt;span&gt;Live Prototype&lt;/span&gt;&lt;/a&gt;
+    &lt;a href="https://github.com/adekunlequareeb9-eng/Dami-s-personal-build-archive-"&gt;⌘ Source Code &lt;span&gt;GitHub&lt;/span&gt;&lt;/a&gt;
+  &lt;/div&gt;
+
+  &lt;h2&gt;What I Learned&lt;/h2&gt;
+  &lt;p&gt;Start with something usable. A project does not need its entire future planned before the first useful version exists.&lt;/p&gt;
+
+  &lt;script&gt;
+  const gallery = ["study-subjects.jpg", "study-tasks.jpg"];
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightboxImage();
+    document.getElementById('lightbox').classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+  function changeImage(direction) {
+    const newIndex = currentIndex + direction;
+    if (newIndex &gt;= 0 &amp;&amp; newIndex &lt; gallery.length) {
+      currentIndex = newIndex;
+      updateLightboxImage();
+    }
+  }
+  function updateLightboxImage() {
+    document.getElementById('lightbox-img').src = gallery[currentIndex];
+    document.getElementById('prevArrow').classList.toggle('disabled', currentIndex === 0);
+    document.getElementById('nextArrow').classList.toggle('disabled', currentIndex === gallery.length - 1);
+  }
+
+  const imgEl = document.getElementById('lightbox-img');
+  const lightboxEl = document.getElementById('lightbox');
+  let startX = 0, startY = 0, deltaX = 0, deltaY = 0, dragging = false;
+
+  imgEl.addEventListener('pointerdown', e =&gt; {
+    startX = e.clientX; startY = e.clientY; dragging = true;
+    imgEl.style.transition = 'none';
+  });
+  imgEl.addEventListener('pointermove', e =&gt; {
+    if (!dragging) return;
+    deltaX = e.clientX - startX; deltaY = e.clientY - startY;
+    if (Math.abs(deltaY) &gt; Math.abs(deltaX) &amp;&amp; deltaY &gt; 0) {
+      imgEl.style.transform = `translateY(${deltaY}px)`;
+      lightboxEl.style.background = `rgba(0,0,0,${Math.max(0.9 - deltaY / 400, 0.2)})`;
+    }
+  });
+  imgEl.addEventListener('pointerup', () =&gt; {
+    if (!dragging) return;
+    dragging = false;
+    imgEl.style.transition = 'transform 0.2s ease';
+    if (Math.abs(deltaX) &gt; Math.abs(deltaY)) {
+      if (Math.abs(deltaX) &gt; 50) changeImage(deltaX &gt; 0 ? -1 : 1);
+    } else if (deltaY &gt; 100) {
+      closeLightbox();
+    }
+    imgEl.style.transform = 'translateY(0)';
+    lightboxEl.style.background = 'rgba(0,0,0,0.9)';
+    deltaX = 0; deltaY = 0;
+  });
+
+  if ("serviceWorker" in navigator) window.addEventListener("load", () =&gt; navigator.serviceWorker.register("./sw.js").then(reg =&gt; reg.update()));
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

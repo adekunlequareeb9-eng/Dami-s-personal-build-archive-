@@ -47,9 +47,7 @@
   <a class="launch" href="study-companion-app.html">Open Working Prototype →</a>
 
   <h2>Screenshots</h2>
-  <div class="gallery">
-    <img src="study-subjects.jpg" onclick="openLightbox(0)">
-    <img src="study-tasks.jpg" onclick="openLightbox(1)">
+  <div class="gallery" id="gallery-container">
   </div>
 
   <div class="lightbox" id="lightbox">
@@ -72,9 +70,16 @@
   <h2>What I Learned</h2>
   <p>Start with something usable. A project does not need its entire future planned before the first useful version exists.</p>
 
+  <script src="study-companion-shots.js"></script>
   <script>
-  const gallery = ["study-subjects.jpg", "study-tasks.jpg"];
   let currentIndex = 0;
+  const container = document.getElementById('gallery-container');
+  gallery.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.onclick = () => openLightbox(i);
+    container.appendChild(img);
+  });
 
   function openLightbox(index) {
     currentIndex = index;

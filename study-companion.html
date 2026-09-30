@@ -70,8 +70,10 @@
   <h2>What I Learned</h2>
   <p>Start with something usable. A project does not need its entire future planned before the first useful version exists.</p>
 
-  <script src="study-companion-shots.js"></script>
+  <script src="shot-subjects.js"></script>
+  <script src="shot-tasks.js"></script>
   <script>
+  const gallery = [shotSubjects, shotTasks];
   let currentIndex = 0;
   const container = document.getElementById('gallery-container');
   gallery.forEach((src, i) => {

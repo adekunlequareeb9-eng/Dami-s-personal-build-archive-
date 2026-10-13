@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+  <title>Fingerprint — Damilare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12121a">
+  <meta name="description" content="Fingerprint: a page that shows what any website can read about your device.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+    body{background:#12121a;color:white;font-family:Arial,sans-serif;padding:30px 20px;margin:0;max-width:500px;margin:auto}
+    a.back{color:#888;text-decoration:none;font-size:.9em}.navbar{display:flex;justify-content:center;gap:25px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid #2e2e42}
+    .navbar a{color:#888;text-decoration:none;font-size:.9em;letter-spacing:1px}.navbar a.current{color:#ffcc00;font-weight:bold}
+    h1{margin-top:15px;margin-bottom:5px}.status{display:inline-block;background:#2e2e42;color:#facc15;padding:4px 10px;border-radius:20px;font-size:.8em;margin-bottom:20px}
+    .meta{color:#888;font-size:.85em;margin-bottom:25px}h2{font-size:1.1em;color:#ffcc00;border-bottom:1px solid #2e2e42;padding-bottom:8px;margin-top:35px}
+    p{line-height:1.6;color:#ddd}.feature{background:#1e1e2a;border-radius:10px;padding:14px;margin:10px 0}.feature strong{display:block;margin-bottom:5px}.feature span{color:#aaa;font-size:.9em}
+    .note{color:#888;font-size:.85em;line-height:1.5}
+    .links a{display:block;background-color:#1e1e2a;color:white;text-decoration:none;padding:12px 15px;border-radius:10px;margin-bottom:10px;word-break:break-all}
+    .links a span{color:#888;font-size:.85em;display:block}
+  </style>
+</head>
+<body>
+  <div class="navbar"><a href="index.html">HOME</a><a href="archive.html" class="current">ARCHIVE</a></div>
+  <a class="back" href="archive.html">← Back to Archive</a>
+  <h1>Fingerprint</h1>
+  <div class="status">🟢 Live · Experiment</div>
+  <div class="meta">Started Oct 2026 · HTML · CSS · JavaScript</div>
+  <h2>The Idea</h2>
+  <p>Every website you open can read a surprising amount about your device without asking. Fingerprint shows you exactly what that is, then turns it into a uniqueness score and a short fingerprint code. Everything runs inside your browser. Nothing is sent anywhere.</p>
+  <h2>What It Checks</h2>
+  <div class="feature"><strong>Device</strong><span>Screen size, CPU cores, memory, touch support and platform.</span></div>
+  <div class="feature"><strong>Graphics</strong><span>A canvas drawing hash and the GPU name reported by WebGL, which are some of the most identifying signals.</span></div>
+  <div class="feature"><strong>Locale and fonts</strong><span>Language, timezone and how many common fonts are installed.</span></div>
+  <div class="feature"><strong>Score and hash</strong><span>A 0–100 uniqueness score and a short code built from all the signals together.</span></div>
+  <h2>What I Learned</h2>
+  <p>Clearing cookies does not make you anonymous. Ordinary settings, taken together, can already make a device stand out.</p>
+
+  <h2>Links</h2>
+  <div class="links">
+    <a href="https://fingerprint.adekunlequareeb9.workers.dev">https://fingerprint.adekunlequareeb9.workers.dev</a>
+    <a href="https://github.com/adekunlequareeb9-eng/Fingerprint">⌘ Source Code <span>GitHub</span></a>
+  </div>
+
+  <script>
+  if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").then(reg => reg.update()));
+  </script>
+</body>
+</html>

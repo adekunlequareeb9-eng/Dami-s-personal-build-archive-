@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+  <title>gitclaw — Damilare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12121a">
+  <meta name="description" content="gitclaw: an AI coding assistant that runs through GitHub Issues and Actions.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+    body{background:#12121a;color:white;font-family:Arial,sans-serif;padding:30px 20px;margin:0;max-width:500px;margin:auto}
+    a.back{color:#888;text-decoration:none;font-size:.9em}.navbar{display:flex;justify-content:center;gap:25px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid #2e2e42}
+    .navbar a{color:#888;text-decoration:none;font-size:.9em;letter-spacing:1px}.navbar a.current{color:#ffcc00;font-weight:bold}
+    h1{margin-top:15px;margin-bottom:5px}.status{display:inline-block;background:#2e2e42;color:#facc15;padding:4px 10px;border-radius:20px;font-size:.8em;margin-bottom:20px}
+    .meta{color:#888;font-size:.85em;margin-bottom:25px}h2{font-size:1.1em;color:#ffcc00;border-bottom:1px solid #2e2e42;padding-bottom:8px;margin-top:35px}
+    p{line-height:1.6;color:#ddd}.feature{background:#1e1e2a;border-radius:10px;padding:14px;margin:10px 0}.feature strong{display:block;margin-bottom:5px}.feature span{color:#aaa;font-size:.9em}
+    .note{color:#888;font-size:.85em;line-height:1.5}.note a{color:#ffcc00}
+    .links a{display:block;background-color:#1e1e2a;color:white;text-decoration:none;padding:12px 15px;border-radius:10px;margin-bottom:10px;word-break:break-all}
+    .links a span{color:#888;font-size:.85em;display:block}
+  </style>
+</head>
+<body>
+  <div class="navbar"><a href="index.html">HOME</a><a href="archive.html" class="current">ARCHIVE</a></div>
+  <a class="back" href="archive.html">← Back to Archive</a>
+  <h1>gitclaw</h1>
+  <div class="status">🟡 Experiment · Built on pi-mono</div>
+  <div class="meta">Started Oct 2026 · GitHub Actions · DeepSeek</div>
+  <h2>The Idea</h2>
+  <p>A personal AI coding assistant that lives entirely inside a GitHub repository. There is no server to run: you talk to it through GitHub Issues, and GitHub Actions does the work.</p>
+  <h2>How It Works</h2>
+  <div class="feature"><strong>Open an issue</strong><span>The agent reads the request and replies as a comment.</span></div>
+  <div class="feature"><strong>Keep the conversation going</strong><span>Comment on the issue and the agent resumes the same session with its earlier context.</span></div>
+  <div class="feature"><strong>The repo is the memory</strong><span>Sessions and any changes the agent makes are committed back to the repository.</span></div>
+  <div class="feature"><strong>Locked down</strong><span>Only the repository owner, members and collaborators can trigger it.</span></div>
+  <h2>Credit</h2>
+  <p class="note">This is my own setup of an existing idea. gitclaw is built on top of <a href="https://github.com/badlogic/pi-mono">pi-mono</a> by Mario Zechner, and mine is configured to use the DeepSeek model.</p>
+  <h2>What I Learned</h2>
+  <p>A whole assistant can run without any server of my own. GitHub provides the trigger, the compute and the storage.</p>
+
+  <h2>Links</h2>
+  <div class="links">
+    <a href="https://github.com/adekunlequareeb9-eng/gitclaw">⌘ Source Code <span>GitHub</span></a>
+  </div>
+
+  <script>
+  if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").then(reg => reg.update()));
+  </script>
+</body>
+</html>

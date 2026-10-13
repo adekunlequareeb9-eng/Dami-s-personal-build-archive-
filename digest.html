@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+  <title>Digest — Damilare</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12121a">
+  <meta name="description" content="Digest: a personal news reader built in Python that runs on my phone.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+    body{background:#12121a;color:white;font-family:Arial,sans-serif;padding:30px 20px;margin:0;max-width:500px;margin:auto}
+    a.back{color:#888;text-decoration:none;font-size:.9em}.navbar{display:flex;justify-content:center;gap:25px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid #2e2e42}
+    .navbar a{color:#888;text-decoration:none;font-size:.9em;letter-spacing:1px}.navbar a.current{color:#ffcc00;font-weight:bold}
+    h1{margin-top:15px;margin-bottom:5px}.status{display:inline-block;background:#2e2e42;color:#facc15;padding:4px 10px;border-radius:20px;font-size:.8em;margin-bottom:20px}
+    .meta{color:#888;font-size:.85em;margin-bottom:25px}h2{font-size:1.1em;color:#ffcc00;border-bottom:1px solid #2e2e42;padding-bottom:8px;margin-top:35px}
+    p{line-height:1.6;color:#ddd}.feature{background:#1e1e2a;border-radius:10px;padding:14px;margin:10px 0}.feature strong{display:block;margin-bottom:5px}.feature span{color:#aaa;font-size:.9em}
+    .note{color:#888;font-size:.85em;line-height:1.5}
+    .links a{display:block;background-color:#1e1e2a;color:white;text-decoration:none;padding:12px 15px;border-radius:10px;margin-bottom:10px;word-break:break-all}
+    .links a span{color:#888;font-size:.85em;display:block}
+  </style>
+</head>
+<body>
+  <div class="navbar"><a href="index.html">HOME</a><a href="archive.html" class="current">ARCHIVE</a></div>
+  <a class="back" href="archive.html">← Back to Archive</a>
+  <h1>Digest</h1>
+  <div class="status">🟡 In Development · Runs Locally</div>
+  <div class="meta">Started Oct 2026 · Python · SQLite · RSS</div>
+  <h2>The Idea</h2>
+  <p>A personal news reader that collects articles from the feeds I choose and keeps them in one place. It was built and runs on my phone in Termux, with no cloud service involved.</p>
+  <h2>How It Works</h2>
+  <div class="feature"><strong>Fetching</strong><span>Reads every enabled RSS feed, cleans up the text and saves new articles to a local SQLite database. Duplicates are skipped and feed errors are recorded.</span></div>
+  <div class="feature"><strong>Why it matters</strong><span>Matches keywords such as security, pricing or deprecated and attaches a short note about why the article is worth reading. If nothing matches, it stays silent.</span></div>
+  <div class="feature"><strong>Local app</strong><span>A small web app with templates shows the collected articles, plus scripts to fetch, run and back up the data.</span></div>
+  <h2>The Journey</h2>
+  <p>This is a working tool that I keep improving as I use it. It lives on my own device, so there is no live demo, but the code is on GitHub.</p>
+  <p class="note">The "why it matters" notes are rule-based on purpose. A missing note is better than a generic one.</p>
+
+  <h2>Links</h2>
+  <div class="links">
+    <a href="https://github.com/adekunlequareeb9-eng/Digest">⌘ Source Code <span>GitHub</span></a>
+  </div>
+
+  <script>
+  if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").then(reg => reg.update()));
+  </script>
+</body>
+</html>

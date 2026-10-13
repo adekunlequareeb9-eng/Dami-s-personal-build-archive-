@@ -1,4 +1,4 @@
-const CACHE_NAME = "dami-archive-v7";
+const CACHE_NAME = "dami-archive-v8";
 
 const APP_SHELL = [
   "./",
@@ -22,7 +22,9 @@ const APP_SHELL = [
   "./shot11.jpg",
   "./shot12.jpg",
   "./shot13.jpg",
-  "./shot14.jpg"
+  "./shot14.jpg",
+  "./screenshot-subjects.jpg",
+  "./screenshot-tasks.jpg"
 ];
 
 self.addEventListener("install", event => {
